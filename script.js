@@ -7,8 +7,9 @@ const downloadBtn = document.querySelector(".download"); // Download button
 let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 let recognition;
 let recording = false;
-let hotTextContent = "";
+let hotTextContent = ""; 
 
+// Initialize and handle speech recognition
 function speechToText() {
   try {
     recognition = new SpeechRecognition();
@@ -30,11 +31,14 @@ function speechToText() {
         hotTextContent += " " + speechResult;
         hotText.querySelector(".hot-interim").textContent = hotTextContent;
 
-        // Clear provisional text
+        // Remove interim element if exists
         const interimElement = result.querySelector("p");
         if (interimElement) {
           interimElement.remove();
         }
+
+        // Enable the download button
+        downloadBtn.disabled = false;
       } else {
         // Update provisional text in both containers
         let interimElement = result.querySelector(".interim");
@@ -93,7 +97,7 @@ copyBtn.addEventListener("click", () => {
     .writeText(hotTextContent)
     .then(() => {
       alert("Text copied to clipboard.");
-      hotTextContent = "";
+      hotTextContent = ""; 
       hotText.querySelector(".hot-interim").textContent = "";
     })
     .catch((err) => {
