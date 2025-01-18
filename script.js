@@ -7,6 +7,7 @@ const downloadBtn = document.querySelector(".download"); // Download button
 let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 let recognition;
 let recording = false;
+let hotTextBuffer = ""; 
 
 function speechToText() {
   try {
@@ -24,14 +25,14 @@ function speechToText() {
       if (event.results[0].isFinal) {
         // Append the final text to both containers
         result.innerHTML += " " + speechResult;
-        hotText.innerHTML += " " + speechResult;
+
+        // Append only new text to hotTextBuffer and hotText container
+        hotTextBuffer += " " + speechResult;
+        hotText.innerHTML = hotTextBuffer;
 
         // Remove provisional text elements if they exist
         const interimElementResult = result.querySelector("p.interim");
-        const interimElementHot = hotText.querySelector("p.hot-interim");
-
         if (interimElementResult) interimElementResult.remove();
-        if (interimElementHot) interimElementHot.remove();
 
         // Enable the download button
         downloadBtn.disabled = false;
@@ -90,10 +91,10 @@ function stopRecording() {
 
 // Copy hot-text content and clear it
 copyBtn.addEventListener("click", () => {
-  const hotTextContent = hotText.innerText; 
   navigator.clipboard
-    .writeText(hotTextContent)
+    .writeText(hotTextBuffer) 
     .then(() => {
+      hotTextBuffer = ""; 
       hotText.innerHTML = "";
     })
     .catch((err) => {

@@ -126,7 +126,7 @@ body {
   justify-content: center;
   gap: 20px;
 }
-button#copy {
+/* button#copy {
     position: absolute;
     right: 10;
     cursor: pointer;
@@ -136,6 +136,18 @@ button#copy {
     border-radius: 5px;
     color: #ffffff;
     font-weight: 600;
+} */
+button#copy {
+    /* position: absolute; */
+    right: 10;
+    cursor: pointer;
+    padding: 6px 20px;
+    border: unset;
+    background-color: #356aff;
+    border-radius: 5px;
+    color: #ffffff;
+    font-weight: 600;
+    zoom: 1.2;
 }
 
 /* Estilos para navegadores basados en WebKit (Chrome, Safari) */
