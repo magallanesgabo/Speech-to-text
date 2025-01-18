@@ -98,7 +98,6 @@ body {
     width: 50%;
     min-height: 200px;
     max-height: 200px;
-    margin: 0px 10px;
     padding: 10px;
     border: 1px solid var(--light-text-color);
     border-radius: 5px;
@@ -106,6 +105,7 @@ body {
     font-weight: 500;
     margin-bottom: 20px;
     color: var(--text-color);
+    overflow-y: auto
 }
 .result.hot-text {
     border: 2px solid #356aff;
@@ -123,6 +123,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 20px;
 }
 button#copy {
     float: right;
@@ -132,4 +133,19 @@ button#copy {
     border-radius: 5px;
     color: #ffffff;
     font-weight: 600;
+    position: sticky;
+}
+
+/* Estilos para navegadores basados en WebKit (Chrome, Safari) */
+*::-webkit-scrollbar {
+    width: 4px; 
+}
+
+*::-webkit-scrollbar-track {
+    background: #faf9f9;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #afafafb0;
+    border-radius: 10px;
 }
