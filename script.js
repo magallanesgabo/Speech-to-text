@@ -1,19 +1,18 @@
 const recordBtn = document.querySelector(".record");
-const result = document.querySelector(".result:last-child"); // Div para el texto completo
-const hotText = document.querySelector(".hot-text"); // Div para el texto inmediato
-const copyBtn = document.getElementById("copy"); // Botón de copiar
-const downloadBtn = document.querySelector(".download"); // Botón de descarga
+const result = document.querySelector(".result:last-child"); // Full text container
+const hotText = document.querySelector(".hot-text"); // Hot-text container
+const copyBtn = document.getElementById("copy"); // Copy button
+const downloadBtn = document.querySelector(".download"); // Download button
 
 let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 let recognition;
 let recording = false;
-let hotTextContent = ""; 
-const MAX_HOT_WORDS = 100; // Límite de palabras para el hot-text
+let hotTextContent = "";
 
 function speechToText() {
   try {
     recognition = new SpeechRecognition();
-    recognition.lang = "en-US"; // Idioma fijo
+    recognition.lang = "en-US";
     recognition.interimResults = true;
 
     recordBtn.classList.add("recording");
@@ -23,23 +22,21 @@ function speechToText() {
     recognition.onresult = (event) => {
       const speechResult = event.results[0][0].transcript;
 
-      // Procesar resultados finales
       if (event.results[0].isFinal) {
+        // Update full text container
         result.innerHTML += " " + speechResult;
 
+        // Update hot-text container
         hotTextContent += " " + speechResult;
-        const words = hotTextContent.trim().split(/\s+/);
-        if (words.length > MAX_HOT_WORDS) {
-          hotTextContent = words.slice(-MAX_HOT_WORDS).join(" "); 
-        }
         hotText.querySelector(".hot-interim").textContent = hotTextContent;
 
-        // Limpiar el texto provisional
+        // Clear provisional text
         const interimElement = result.querySelector("p");
         if (interimElement) {
           interimElement.remove();
         }
       } else {
+        // Update provisional text in both containers
         let interimElement = result.querySelector(".interim");
         if (!interimElement) {
           interimElement = document.createElement("p");
@@ -64,15 +61,15 @@ function speechToText() {
 
     recognition.onerror = (event) => {
       stopRecording();
-      console.error("Error en el reconocimiento de voz:", event.error);
+      console.error("Speech recognition error:", event.error);
     };
   } catch (error) {
     recording = false;
-    console.error("Error al iniciar SpeechRecognition:", error);
+    console.error("Error initializing SpeechRecognition:", error);
   }
 }
 
-// Inicia o detiene la grabación
+// Start or stop recording
 recordBtn.addEventListener("click", () => {
   if (!recording) {
     speechToText();
@@ -82,6 +79,7 @@ recordBtn.addEventListener("click", () => {
   }
 });
 
+// Stop recording
 function stopRecording() {
   recognition.stop();
   recordBtn.classList.remove("recording");
@@ -89,22 +87,23 @@ function stopRecording() {
   recording = false;
 }
 
-// Copiar texto del hot-text y limpiarlo
+// Copy hot-text content and clear it
 copyBtn.addEventListener("click", () => {
   navigator.clipboard
     .writeText(hotTextContent)
     .then(() => {
-      hotTextContent = ""; 
+      alert("Text copied to clipboard.");
+      hotTextContent = "";
       hotText.querySelector(".hot-interim").textContent = "";
     })
     .catch((err) => {
-      console.error("Error al copiar:", err);
+      console.error("Error copying text:", err);
     });
 });
 
-// Descargar texto completo del result
+// Download full text content
 downloadBtn.addEventListener("click", () => {
-  const text = result.innerText; 
+  const text = result.innerText;
   const filename = "speech.txt";
 
   const element = document.createElement("a");
