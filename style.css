@@ -107,7 +107,7 @@ body {
     margin-bottom: 20px;
     color: var(--text-color);
 }
-.result .hot-text {
+.result.hot-text {
     border: 2px solid #356aff;
 }
 .container .result p {
@@ -123,4 +123,13 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+button#copy {
+    float: right;
+    padding: 6px 20px;
+    border: unset;
+    background-color: #356aff;
+    border-radius: 5px;
+    color: #ffffff;
+    font-weight: 600;
 }
