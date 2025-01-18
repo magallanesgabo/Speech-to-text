@@ -7,7 +7,7 @@ const downloadBtn = document.querySelector(".download"); // Download button
 let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 let recognition;
 let recording = false;
-let hotTextContent = ""; 
+let hotTextContent = "";
 
 // Initialize and handle speech recognition
 function speechToText() {
@@ -27,7 +27,7 @@ function speechToText() {
         // Update full text container
         result.innerHTML += " " + speechResult;
 
-        // Update hot-text container
+        // Update hot-text container (works like result)
         hotTextContent += " " + speechResult;
         hotText.querySelector(".hot-interim").textContent = hotTextContent;
 
@@ -96,9 +96,8 @@ copyBtn.addEventListener("click", () => {
   navigator.clipboard
     .writeText(hotTextContent)
     .then(() => {
-      alert("Text copied to clipboard.");
       hotTextContent = ""; 
-      hotText.querySelector(".hot-interim").textContent = "";
+      hotText.querySelector(".hot-interim").textContent = ""; 
     })
     .catch((err) => {
       console.error("Error copying text:", err);
