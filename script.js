@@ -7,6 +7,7 @@ const downloadBtn = document.querySelector(".download"); // Download button
 let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 let recognition;
 let recording = false;
+let hotTextContent = ""; 
 
 function speechToText() {
   try {
@@ -24,7 +25,9 @@ function speechToText() {
       if (event.results[0].isFinal) {
         // Append the final text to both containers
         result.innerHTML += " " + speechResult;
-        hotText.innerHTML += " " + speechResult;
+
+        hotTextContent += " " + speechResult;
+        hotText.querySelector(".hot-interim").textContent = hotTextContent;
 
         // Remove provisional text elements
         const interimElementResult = result.querySelector("p");
@@ -45,13 +48,13 @@ function speechToText() {
         }
         interimElementResult.innerHTML = " " + speechResult;
 
-        let interimElementHot = hotText.querySelector(".hot-interim");
-        if (!interimElementHot) {
-          interimElementHot = document.createElement("p");
-          interimElementHot.classList.add("hot-interim");
-          hotText.appendChild(interimElementHot);
+        let hotInterimElement = hotText.querySelector(".hot-interim");
+        if (!hotInterimElement) {
+          hotInterimElement = document.createElement("p");
+          hotInterimElement.classList.add("hot-interim");
+          hotText.appendChild(hotInterimElement);
         }
-        interimElementHot.innerHTML = " " + speechResult;
+        hotInterimElement.innerHTML = " " + speechResult;
       }
     };
 
@@ -89,12 +92,12 @@ function stopRecording() {
 
 // Copy hot-text content and clear it
 copyBtn.addEventListener("click", () => {
-  const hotTextContent = hotText.innerText;
   navigator.clipboard
     .writeText(hotTextContent)
     .then(() => {
       alert("Text copied to clipboard.");
-      hotText.innerHTML = "";
+      hotTextContent = ""; 
+      hotText.querySelector(".hot-interim").textContent = ""; 
     })
     .catch((err) => {
       console.error("Error copying text:", err);
