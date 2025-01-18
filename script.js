@@ -7,9 +7,7 @@ const downloadBtn = document.querySelector(".download"); // Download button
 let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 let recognition;
 let recording = false;
-let hotTextContent = "";
 
-// Initialize and handle speech recognition
 function speechToText() {
   try {
     recognition = new SpeechRecognition();
@@ -24,38 +22,36 @@ function speechToText() {
       const speechResult = event.results[0][0].transcript;
 
       if (event.results[0].isFinal) {
-        // Update full text container
+        // Append the final text to both containers
         result.innerHTML += " " + speechResult;
+        hotText.innerHTML += " " + speechResult;
 
-        // Update hot-text container (works like result)
-        hotTextContent += " " + speechResult;
-        hotText.querySelector(".hot-interim").textContent = hotTextContent;
+        // Remove provisional text elements
+        const interimElementResult = result.querySelector("p");
+        const interimElementHot = hotText.querySelector("p");
 
-        // Remove interim element if exists
-        const interimElement = result.querySelector("p");
-        if (interimElement) {
-          interimElement.remove();
-        }
+        if (interimElementResult) interimElementResult.remove();
+        if (interimElementHot) interimElementHot.remove();
 
         // Enable the download button
         downloadBtn.disabled = false;
       } else {
         // Update provisional text in both containers
-        let interimElement = result.querySelector(".interim");
-        if (!interimElement) {
-          interimElement = document.createElement("p");
-          interimElement.classList.add("interim");
-          result.appendChild(interimElement);
+        let interimElementResult = result.querySelector(".interim");
+        if (!interimElementResult) {
+          interimElementResult = document.createElement("p");
+          interimElementResult.classList.add("interim");
+          result.appendChild(interimElementResult);
         }
-        interimElement.innerHTML = " " + speechResult;
+        interimElementResult.innerHTML = " " + speechResult;
 
-        let hotInterimElement = hotText.querySelector(".hot-interim");
-        if (!hotInterimElement) {
-          hotInterimElement = document.createElement("p");
-          hotInterimElement.classList.add("hot-interim");
-          hotText.appendChild(hotInterimElement);
+        let interimElementHot = hotText.querySelector(".hot-interim");
+        if (!interimElementHot) {
+          interimElementHot = document.createElement("p");
+          interimElementHot.classList.add("hot-interim");
+          hotText.appendChild(interimElementHot);
         }
-        hotInterimElement.innerHTML = " " + speechResult;
+        interimElementHot.innerHTML = " " + speechResult;
       }
     };
 
@@ -93,11 +89,12 @@ function stopRecording() {
 
 // Copy hot-text content and clear it
 copyBtn.addEventListener("click", () => {
+  const hotTextContent = hotText.innerText;
   navigator.clipboard
     .writeText(hotTextContent)
     .then(() => {
-      hotTextContent = ""; 
-      hotText.querySelector(".hot-interim").textContent = ""; 
+      alert("Text copied to clipboard.");
+      hotText.innerHTML = "";
     })
     .catch((err) => {
       console.error("Error copying text:", err);
@@ -106,7 +103,7 @@ copyBtn.addEventListener("click", () => {
 
 // Download full text content
 downloadBtn.addEventListener("click", () => {
-  const text = result.innerText;
+  const text = result.innerText; 
   const filename = "speech.txt";
 
   const element = document.createElement("a");
