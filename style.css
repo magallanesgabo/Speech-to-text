@@ -95,15 +95,20 @@ body {
   display: none;
 }
 .container .result {
-  width: 100%;
-  min-height: 200px;
-  padding: 10px;
-  border: 1px solid var(--light-text-color);
-  border-radius: 5px;
-  font-size: 18px;
-  font-weight: 500;
-  margin-bottom: 20px;
-  color: var(--text-color);
+    width: 50%;
+    min-height: 200px;
+    max-height: 200px;
+    margin: 0px 10px;
+    padding: 10px;
+    border: 1px solid var(--light-text-color);
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    color: var(--text-color);
+}
+.result .hot-text {
+    border: 2px solid #356aff;
 }
 .container .result p {
   display: inline;
@@ -116,7 +121,6 @@ body {
 }
 .flex {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
 }
