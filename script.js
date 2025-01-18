@@ -8,7 +8,6 @@ let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecogniti
 let recognition;
 let recording = false;
 
-// Initialize and handle speech recognition
 function speechToText() {
   try {
     recognition = new SpeechRecognition();
@@ -23,15 +22,13 @@ function speechToText() {
       const speechResult = event.results[0][0].transcript;
 
       if (event.results[0].isFinal) {
-        // Append the final text to the full text container
+        // Append the final text to both containers
         result.innerHTML += " " + speechResult;
-
-        // Append the final text to the hot text container
         hotText.innerHTML += " " + speechResult;
 
         // Remove provisional text elements if they exist
-        const interimElementResult = result.querySelector("p");
-        const interimElementHot = hotText.querySelector("p");
+        const interimElementResult = result.querySelector("p.interim");
+        const interimElementHot = hotText.querySelector("p.hot-interim");
 
         if (interimElementResult) interimElementResult.remove();
         if (interimElementHot) interimElementHot.remove();
@@ -48,14 +45,14 @@ function speechToText() {
         }
         interimElementResult.innerHTML = " " + speechResult;
 
-        // Update provisional text in the hot text container (identical behavior)
-        let interimElementHot = hotText.querySelector(".hot-interim");
-        if (!interimElementHot) {
-          interimElementHot = document.createElement("p");
-          interimElementHot.classList.add("hot-interim");
-          hotText.appendChild(interimElementHot);
+        // Update provisional text in the hot text container
+        let hotInterimElement = hotText.querySelector(".hot-interim");
+        if (!hotInterimElement) {
+          hotInterimElement = document.createElement("p");
+          hotInterimElement.classList.add("hot-interim");
+          hotText.appendChild(hotInterimElement);
         }
-        interimElementHot.innerHTML = " " + speechResult;
+        hotInterimElement.innerHTML = " " + speechResult;
       }
     };
 
@@ -93,12 +90,11 @@ function stopRecording() {
 
 // Copy hot-text content and clear it
 copyBtn.addEventListener("click", () => {
-  const hotTextContent = hotText.innerText; // Get consolidated text from hot-text
+  const hotTextContent = hotText.innerText; 
   navigator.clipboard
     .writeText(hotTextContent)
     .then(() => {
-      alert("Text copied to clipboard.");
-      hotText.innerHTML = ""; // Clear visible hot-text
+      hotText.innerHTML = "";
     })
     .catch((err) => {
       console.error("Error copying text:", err);
@@ -107,7 +103,7 @@ copyBtn.addEventListener("click", () => {
 
 // Download full text content
 downloadBtn.addEventListener("click", () => {
-  const text = result.innerText; // Get full text from result
+  const text = result.innerText; 
   const filename = "speech.txt";
 
   const element = document.createElement("a");
