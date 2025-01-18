@@ -1,13 +1,14 @@
 const recordBtn = document.querySelector(".record");
-const result = document.querySelector(".result:last-child"); 
-const hotText = document.querySelector(".hot-text");
-const copyBtn = document.getElementById("copy"); 
+const result = document.querySelector(".result:last-child"); // Div para el texto completo
+const hotText = document.querySelector(".hot-text"); // Div para el texto inmediato
+const copyBtn = document.getElementById("copy"); // Botón de copiar
+const downloadBtn = document.querySelector(".download"); // Botón de descarga
 
 let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 let recognition;
 let recording = false;
 let hotTextContent = ""; 
-const MAX_HOT_WORDS = 80; 
+const MAX_HOT_WORDS = 100; // Límite de palabras para el hot-text
 
 function speechToText() {
   try {
@@ -22,16 +23,18 @@ function speechToText() {
     recognition.onresult = (event) => {
       const speechResult = event.results[0][0].transcript;
 
+      // Procesar resultados finales
       if (event.results[0].isFinal) {
         result.innerHTML += " " + speechResult;
 
         hotTextContent += " " + speechResult;
-        const words = hotTextContent.trim().split(/\s+/); 
+        const words = hotTextContent.trim().split(/\s+/);
         if (words.length > MAX_HOT_WORDS) {
           hotTextContent = words.slice(-MAX_HOT_WORDS).join(" "); 
         }
         hotText.querySelector(".hot-interim").textContent = hotTextContent;
 
+        // Limpiar el texto provisional
         const interimElement = result.querySelector("p");
         if (interimElement) {
           interimElement.remove();
@@ -86,14 +89,32 @@ function stopRecording() {
   recording = false;
 }
 
-// Copiar texto del hot-text
+// Copiar texto del hot-text y limpiarlo
 copyBtn.addEventListener("click", () => {
   navigator.clipboard
     .writeText(hotTextContent)
     .then(() => {
-      alert("Texto copiado al portapapeles.");
+      hotTextContent = ""; 
+      hotText.querySelector(".hot-interim").textContent = "";
     })
     .catch((err) => {
       console.error("Error al copiar:", err);
     });
+});
+
+// Descargar texto completo del result
+downloadBtn.addEventListener("click", () => {
+  const text = result.innerText; 
+  const filename = "speech.txt";
+
+  const element = document.createElement("a");
+  element.setAttribute(
+    "href",
+    "data:text/plain;charset=utf-8," + encodeURIComponent(text)
+  );
+  element.setAttribute("download", filename);
+  element.style.display = "none";
+  document.body.appendChild(element);
+  element.click();
+  document.body.removeChild(element);
 });
