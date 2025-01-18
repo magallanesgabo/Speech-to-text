@@ -114,3 +114,9 @@ body {
   display: flex;
   gap: 20px;
 }
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
