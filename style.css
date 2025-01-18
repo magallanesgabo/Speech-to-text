@@ -109,6 +109,7 @@ body {
 }
 .result.hot-text {
     border: 2px solid #356aff;
+    position: relative;
 }
 .container .result p {
   display: inline;
@@ -126,14 +127,15 @@ body {
   gap: 20px;
 }
 button#copy {
-    float: right;
+    position: absolute;
+    right: 10;
+    cursor: pointer;
     padding: 6px 20px;
     border: unset;
     background-color: #356aff;
     border-radius: 5px;
     color: #ffffff;
     font-weight: 600;
-    position: sticky;
 }
 
 /* Estilos para navegadores basados en WebKit (Chrome, Safari) */
