@@ -6,25 +6,9 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&subset=latin&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&subset=latin&display=swap"></noscript>
-    <link rel="stylesheet" href="style.css">
+    <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="styles.css"></noscript>
     <title>Speech to Text</title>
-    <style type="text/css">
-      @font-face {
-        font-weight: 400;
-        font-style:  normal;
-        font-family: circular;
-      
-        src: url('chrome-extension://liecbddmkiiihnedobmlmillhodjkdmb/fonts/CircularXXWeb-Book.woff2') format('woff2');
-      }
-
-      @font-face {
-        font-weight: 700;
-        font-style:  normal;
-        font-family: circular;
-      
-        src: url('chrome-extension://liecbddmkiiihnedobmlmillhodjkdmb/fonts/CircularXXWeb-Bold.woff2') format('woff2');
-      }
-    </style>
     </head>
   <body>
     <div class="container">
@@ -64,6 +48,6 @@
     <!-- IONICONS -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule="" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <script src="script.js"></script>  
+    <script src="script.js" defer></script>  
 </body>
 </html>
