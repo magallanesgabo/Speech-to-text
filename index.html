@@ -17,31 +17,23 @@
       <p class="heading">Speech to Text</p>
       <div class="buttons"> 
       <button class="btn record">
-        <div class="icon">
+        <span class="icon">
           <ion-icon name="mic-outline" role="img" class="md hydrated" aria-label="mic outline"></ion-icon>
           <img src="bars.svg" alt="">
-        </div>
-        <p style="inline-size: max-content;">Start Listening</p>
+        </span>
+        <span style="inline-size: max-content;">Start Listening</span>
       </button>
         <button class="btn download" disabled>
           <ion-icon name="cloud-download-outline"></ion-icon>
-          <p>Download</p>
+          <span>Download</span>
         </button>
       </div>
       <div class="flex">
         <button id="copy">Copy</button>
-        <div
-          class="result hot-text"
-          spellcheck="false"
-          placeholder="Text will be shown here"
-        >
+        <div class="result hot-text" spellcheck="false">
           <p class="hot-interim"></p>
         </div>
-        <div
-          class="result"
-          spellcheck="false"
-          placeholder="Text will be shown here"
-        >
+        <div class="result" spellcheck="false">
           <p class="interim"></p>
         </div>
       </div>
