@@ -21,9 +21,12 @@ body {
   justify-content: center;
   background-color: var(--body-bg-color);
   color: var(--text-color);
+  overflow-x: hidden;
 }
 .container {
     width: 95%;
+    min-width: 95%;
+    min-height: 300px;
     padding: 20px;
     margin: 16px 0px;
     border-radius: 10px;
@@ -148,7 +151,7 @@ button#copy {
     background-color: #356aff;
     border-radius: 5px;
     color: #ffffff;
-    font-weight: 600;
+    font-weight: 500;
     zoom: 1.2;
 }
 
