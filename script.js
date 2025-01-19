@@ -30,6 +30,10 @@ function speechToText() {
         hotTextBuffer += " " + speechResult;
         hotText.innerHTML = hotTextBuffer;
 
+        // Append only new text to hotTextBuffer and hotText container
+        hotTextBuffer += " " + speechResult;
+        hotText.innerHTML = hotTextBuffer;
+
         // Remove provisional text elements if they exist
         const interimElementResult = result.querySelector("p.interim");
         if (interimElementResult) interimElementResult.remove();
@@ -92,6 +96,7 @@ function stopRecording() {
 // Copy hot-text content and clear it
 copyBtn.addEventListener("click", () => {
   navigator.clipboard
+    .writeText(hotTextBuffer) 
     .writeText(hotTextBuffer) 
     .then(() => {
       hotTextBuffer = ""; 
