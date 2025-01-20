@@ -88,7 +88,7 @@ body {
     color: #fff;
     background-color: var(--primary-color);
 }
-.btn #microphone {
+.btn svg, #microphone {
   font-size: 30px;
   display: block;
 }
@@ -96,10 +96,7 @@ body {
   background-color: var(--light-text-color);
   cursor: not-allowed;
 }
-#microphone {
-  width: 24px;
-  height: 30px;
-}
+
 .container .record img {
   width: 30px;
   height: 30px;
