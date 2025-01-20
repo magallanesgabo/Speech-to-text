@@ -80,22 +80,29 @@ body {
     color: #fff;
     background-color: var(--primary-color);
 }
-.btn ion-icon {
+.btn #microphone {
   font-size: 30px;
+  display: block;
 }
 .btn:disabled {
   background-color: var(--light-text-color);
   cursor: not-allowed;
+}
+#microphone {
+  width: 30px;
+  height: 28px;
+  margin-right: -7px;
 }
 .container .record img {
   width: 30px;
   height: 30px;
   display: none;
 }
+
 .container .record.recording img {
   display: block;
 }
-.container .record.recording ion-icon {
+.container .record.recording #microphone {
   display: none;
 }
 .container .result {
@@ -131,17 +138,6 @@ body {
   justify-content: center;
   gap: 20px;
 }
-/* button#copy {
-    position: absolute;
-    right: 10;
-    cursor: pointer;
-    padding: 6px 20px;
-    border: unset;
-    background-color: #356aff;
-    border-radius: 5px;
-    color: #ffffff;
-    font-weight: 600;
-} */
 button#copy {
     /* position: absolute; */
     right: 10;
