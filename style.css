@@ -90,9 +90,8 @@ body {
   cursor: not-allowed;
 }
 #microphone {
-  width: 30px;
-  height: 28px;
-  margin-right: -7px;
+  width: 24px;
+  height: 30px;
 }
 .container .record img {
   width: 30px;
