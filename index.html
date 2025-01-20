@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" class="hydrated">
   <head>
-    <meta charset="UTF-8"><style data-styles="">ion-icon{visibility:hidden}.hydrated{visibility:inherit}</style>
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="web app for speech to text conversion">
+    <meta name="description" content="Web app for speech to text conversion">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="preload" href="assets/fonts/poppins-400.woff2" as="font" type="font/woff2">
+    <link rel="preload" href="assets/fonts/poppins-500.woff2" as="font" type="font/woff2">
+    <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="style.css"></noscript>
     <style>
-      /* latin */
       @font-face {
         font-family: 'Poppins';
         font-style: normal;
@@ -16,7 +19,6 @@
         src: url(assets/fonts/poppins-400.woff2) format('woff2');
         unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
       }
-      /* latin */
       @font-face {
         font-family: 'Poppins';
         font-style: normal;
@@ -26,23 +28,21 @@
         unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
       }
     </style>
-    <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="style.css"></noscript>
     <title>Speech to Text</title>
-    </head>
+  </head>
   <body>
     <div class="container">
       <p class="heading">Speech to Text</p>
       <div class="buttons"> 
       <button class="btn record">
         <span class="icon">    
-          <img src="assets/images/microphone.png" id="microphone" alt="microphone icon">
-          <img src="assets/images/bars.svg" alt="bars">
+          <img src="assets/images/microphone.png" id="microphone" alt="microphone icon" width="30" height="28">
+          <img src="assets/images/bars.svg" alt="bars" width="30" height="30">
         </span>
         <span id="listening-text" style="inline-size: max-content;">Start Listening</span>
       </button>
         <button class="btn download" disabled>
-          <img src="assets/images/download.png" width="30px" height="30px" alt="Download icon">
+          <img src="assets/images/download.png" width="30" height="30" alt="Download icon">
           <span>Download</span>
         </button>
       </div>

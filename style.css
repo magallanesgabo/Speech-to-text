@@ -26,6 +26,7 @@ body {
 .container {
     width: 95%;
     min-width: 95%;
+    max-width: 1200px;
     min-height: 300px;
     padding: 20px;
     margin: 16px 0px;
@@ -107,8 +108,7 @@ body {
 }
 .container .result {
     width: 50%;
-    min-height: 200px;
-    max-height: 200px;
+    height: 200px;
     padding: 10px;
     border: 1px solid var(--light-text-color);
     border-radius: 5px;
@@ -116,7 +116,8 @@ body {
     font-weight: 500;
     margin-bottom: 20px;
     color: var(--text-color);
-    overflow-y: auto
+    overflow-y: auto;
+    overflow: hidden;
 }
 .result.hot-text {
     border: 2px solid #356aff;
@@ -149,6 +150,11 @@ button#copy {
     color: #ffffff;
     font-weight: 500;
     zoom: 1.2;
+}
+
+#listening-text {
+  width: 150px;
+  text-align: center;
 }
 
 /* Estilos para navegadores basados en WebKit (Chrome, Safari) */
