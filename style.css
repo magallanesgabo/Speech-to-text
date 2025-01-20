@@ -33,6 +33,13 @@ body {
     border-radius: 10px;
     background-color: var(--bg-color);
 }
+
+@media (max-width: 768px) {
+  .container {
+    min-height: 400px; /* Ajusta según el contenido */
+  }
+}
+
 .container .heading {
   font-size: 25px;
   font-weight: 500;
@@ -154,6 +161,7 @@ button#copy {
 #listening-text {
   width: 150px;
   text-align: center;
+  display: block;
 }
 
 /* Estilos para navegadores basados en WebKit (Chrome, Safari) */
